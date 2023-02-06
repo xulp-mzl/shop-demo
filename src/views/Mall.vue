@@ -1,15 +1,16 @@
 <template>
-  <div class="home">
-    <h1>我是home</h1>
-  </div>
+  <h1>我是mall</h1>
 </template>
 
 <script>
-
 export default {
-  name: 'Home',
+  name: 'Mall',
   data() {
     return {}
   }
 }
 </script>
+
+<style scoped>
+
+</style>

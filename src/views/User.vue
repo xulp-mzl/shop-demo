@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
-    <h1>我是home</h1>
+  <div class="user">
+    <h1>我是User</h1>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Home',
+  name: 'User',
   data() {
     return {}
   }

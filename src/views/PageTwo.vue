@@ -1,15 +1,16 @@
 <template>
-  <div class="home">
-    <h1>我是home</h1>
-  </div>
+  <h1>我是PageTwo.vue</h1>
 </template>
 
 <script>
-
 export default {
-  name: 'Home',
+  name: 'PageTwo',
   data() {
     return {}
   }
 }
 </script>
+
+<style scoped>
+
+</style>
