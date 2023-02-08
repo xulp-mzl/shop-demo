@@ -7,7 +7,7 @@
            background-color="#545c64"
            text-color="#fff"
            active-text-color="#ffd04b">
-    <h3 class="menu-title">通用后台管理系统</h3>
+    <h3 class="menu-title">{{ isCollapse ? '后台' : '通用后台管理系统'}}</h3>
 
     <el-menu-item v-for="item in noChildren" :key="item.name" :index="item.name"
         @click="clickMenu(item)">
@@ -33,7 +33,6 @@ export default {
   name: 'CommonAside',
   data() {
     return {
-      isCollapse: false,
       menuData: [
         {
           path: '/',
@@ -104,16 +103,21 @@ export default {
     // 有子菜单
     hasChildren() {
       return this.menuData.filter(item => item.children)
+    },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse
     }
   }
 }
 </script>
 
 <style lang="less">
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
+  .el-menu-vertical-demo{
+    &.el-menu{
+      border: none;
+    }
     width: 200px;
     min-height: 400px;
-    border: none;
     height: 100vh;
 
     .menu-title{

@@ -1,7 +1,7 @@
 <template>
   <div class="common-header">
     <div class="left-container">
-      <el-button icon="el-icon-menu" size="mini"></el-button>
+      <el-button icon="el-icon-menu" size="mini" @click="collapseMenu"></el-button>
       <!-- 面包屑-->
     </div>
 
@@ -30,6 +30,11 @@ export default {
   data() {
     return {
       photo: meinv
+    }
+  },
+  methods: {
+    collapseMenu(){
+      this.$store.commit('setCollapse')
     }
   }
 }
