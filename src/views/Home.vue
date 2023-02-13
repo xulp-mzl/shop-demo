@@ -1,10 +1,10 @@
 <template>
   <div class="home-container">
     <el-row>
-      <el-col :span="8">
+      <el-col :span="8" style="padding-right: 10px;">
         <el-card class="box-card">
           <div class="user">
-            <img :src="photo" class=""/>
+            <img :src="photo" class="" alt=""/>
             <div class="user-info">
               <p class="name">admin</p>
               <p class="access">超级管理员</p>
@@ -37,7 +37,7 @@
           </el-table>
         </el-card>
       </el-col>
-      <el-col :span="16">
+      <el-col :span="16" style="padding-left: 5px;">
         <div class="order-num">
           <el-card class="num-item" v-for="item in countData" :key="item.name"
             :body-style="{display: 'flex'}">
@@ -48,6 +48,20 @@
             </div>
           </el-card>
         </div>
+
+        <el-card style="height: 250px; margin-bottom: 10px;">
+          <div ref="lineChart" class="line-chart" style="height: 250px;"></div>
+        </el-card>
+
+        <div class="graph">
+          <el-card >
+            <div ref="barChart" class="bar-chart"></div>
+          </el-card>
+          <el-card >
+            <div ref="pieChart" class="pie-chart"></div>
+          </el-card>
+        </div>
+
       </el-col>
     </el-row>
   </div>
@@ -56,6 +70,7 @@
 <script>
 
 import meinv from '@/assets/images/meinv.jpg'
+import * as echarts from 'echarts'
 
 export default {
   name: 'Home',
@@ -118,6 +133,77 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    getChartOption(type){
+      // 指定图表的配置项和数据
+      return {
+        title: {
+          text: ''
+        },
+        tooltip: {},
+        legend: {
+          data: ['销量']
+        },
+        xAxis: {
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '销量',
+            type: type,
+            data: [5, 20, 36, 10, 10, 20]
+          }
+        ]
+      }
+    }
+
+  },
+  mounted(){
+    const echarts1 = echarts.init(this.$refs.lineChart)
+    echarts1.setOption(this.getChartOption('line'))
+
+    const echarts2 = echarts.init(this.$refs.barChart)
+    echarts2.setOption(this.getChartOption('bar'))
+
+    const echarts3 = echarts.init(this.$refs.pieChart)
+    const option = {
+      title: {
+        /* text: 'Referer of a Website',
+        subtext: 'Fake Data',
+        left: 'center' */
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      /* legend: {
+        orient: 'vertical',
+        left: 'left'
+      }, */
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '50%',
+          data: [
+            { value: 1048, name: 'Search Engine' },
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' }
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    }
+    echarts3.setOption(option)
   }
 }
 </script>
@@ -171,7 +257,6 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      margin-left: 15px;
       .num-item{
         width: 32%;
         margin-bottom: 15px;
@@ -203,6 +288,25 @@ export default {
             color: #999999;
             text-align: center;
           }
+        }
+      }
+    }
+
+    .line-chart{
+
+    }
+
+    .graph{
+      display: flex;
+      justify-content: space-between;
+      .el-card{
+        width: 48%;
+        height: 260px;
+        .bar-chart{
+          height: 260px;
+        }
+        .pie-chart{
+          height: 260px;
         }
       }
     }

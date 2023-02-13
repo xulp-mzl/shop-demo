@@ -3,6 +3,9 @@
     <div class="left-container">
       <el-button icon="el-icon-menu" size="mini" @click="collapseMenu"></el-button>
       <!-- 面包屑-->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item v-for="(item, index) in tags" :key="item.path" :to="{ path: item.path }" :class="itemIndex === index ? 'white': ''">{{item.label}}</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
 
     <div class="right-container">
@@ -24,6 +27,7 @@
 <script>
 
 import meinv from '@/assets/images/meinv.jpg'
+import {mapState} from 'vuex'
 
 export default {
   name: 'CommonHeader',
@@ -36,6 +40,16 @@ export default {
     collapseMenu(){
       this.$store.commit('setCollapse')
     }
+  },
+  computed: {
+    // 结构数据
+    ...mapState({
+      tags: state => state.tab.tabsList,
+      itemIndex: state => state.tab.itemIndex
+    })
+  },
+  mounted(){
+    console.log(this.itemIndex)
   }
 }
 </script>
@@ -52,6 +66,29 @@ export default {
     .el-button{
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .left-container{
+      display: flex;
+      align-items: center;
+      .el-breadcrumb{
+        margin-left: 10px;
+        .el-breadcrumb__item{
+          font-weight: normal;
+          .el-breadcrumb__inner{
+            &.is-link{
+              color: #666666;
+            }
+          }
+          &.white{
+            .el-breadcrumb__inner{
+              &.is-link{
+                color: white;
+              }
+            }
+          }
+        }
+      }
     }
 
     .right-container {

@@ -7,6 +7,7 @@
       <el-header>
         <common-header></common-header>
       </el-header>
+      <common-tag></common-tag>
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -18,6 +19,8 @@
 
 import CommonAside from '@/components/CommonAside'
 import CommonHeader from '@/components/CommonHeader'
+import CommonTag from '@/components/CommonTag'
+import {getData} from '@/api/index'
 
 export default {
   name: 'Main',
@@ -26,7 +29,13 @@ export default {
   },
   components: {
     CommonAside,
-    CommonHeader
+    CommonHeader,
+    CommonTag
+  },
+  mounted() {
+    getData().then(msg => {
+      console.log(msg)
+    })
   }
 }
 </script>

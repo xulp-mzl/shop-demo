@@ -17,23 +17,28 @@ const routes = [
     children: [
       {
         path: 'home',
-        component: Home
+        component: Home,
+        name: 'home'
       },
       {
         path: 'user',
-        component: User
+        component: User,
+        name: 'user'
       },
       {
         path: 'mall',
-        component: Mall
+        component: Mall,
+        name: 'mall'
       },
       {
         path: 'page1',
-        component: PageOne
+        component: PageOne,
+        name: 'page1'
       },
       {
         path: 'page2',
-        component: PageTwo
+        component: PageTwo,
+        name: 'page2'
       }
     ]
   }
