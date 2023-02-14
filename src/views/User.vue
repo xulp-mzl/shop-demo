@@ -1,6 +1,47 @@
 <template>
-  <div class="user">
-    <h1>我是User</h1>
+  <div id="user-container">
+    <el-dialog
+      title="用户信息"
+      :visible.sync="dialogVisible"
+      width="50%">
+
+      <el-form ref="form" :model="form" label-width="80px" :inline="true" :rules="rules"
+        :status-icon="true">
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="form.name" placeholder="请输入姓名"></el-input>
+        </el-form-item>
+        <el-form-item label="年龄" prop="age">
+          <el-input v-model="form.age" placeholder="请输入年龄"></el-input>
+        </el-form-item>
+        <el-form-item label="性别" prop="sex">
+          <el-select v-model="form.sex" placeholder="请选择性别">
+            <el-option label="男" value="1"></el-option>
+            <el-option label="女" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="出生日期" prop="birth">
+          <el-date-picker
+            v-model="form.birth"
+            type="date"
+            placeholder="出生日期">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="地址" prop="addr">
+          <el-input v-model="form.addr" placeholder="请输入地址"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
+
+    <div class="manage-header">
+      <el-button type="primary" size="small" @click="openDialog">+ 新增</el-button>
+    </div>
   </div>
 </template>
 
@@ -9,7 +50,44 @@
 export default {
   name: 'User',
   data() {
-    return {}
+    return {
+      dialogVisible: false,
+      form: {
+        name: '',
+        age: '',
+        sex: '',
+        birth: '',
+        addr: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入姓名', trigger: 'blur' }
+        ],
+        age: [
+          { required: true, message: '请输入年龄', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: '请选择性别' }
+        ],
+        birth: [
+          { required: true, message: '请选择生日日期' }
+        ],
+        addr: [
+          { required: true, message: '请输入地址' }
+        ]
+      }
+    }
+  },
+  methods: {
+    openDialog(){
+      this.dialogVisible = true
+    }
   }
 }
 </script>
+
+<style lang="less">
+  #user-container{
+
+  }
+</style>
