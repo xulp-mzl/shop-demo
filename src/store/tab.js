@@ -32,7 +32,6 @@ const tabStore = {
     },
     setItemIndex(state, index){
       state.itemIndex = index
-      console.log(index + '4')
     }
   },
   actions: {
