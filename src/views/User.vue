@@ -3,10 +3,14 @@
     <el-dialog
       title="用户信息"
       :visible.sync="dialogVisible"
-      width="50%">
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      width="50%"
+      :before-close="handleClose">
 
       <el-form ref="form" :model="form" label-width="80px" :inline="true" :rules="rules"
-        :status-icon="true">
+        :status-icon="true"
+        label-position="right">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="form.name" placeholder="请输入姓名"></el-input>
         </el-form-item>
@@ -33,8 +37,8 @@
 
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button @click="cancel">取 消</el-button>
+          <el-button type="primary" @click="submitForm">确 定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -81,6 +85,24 @@ export default {
   methods: {
     openDialog(){
       this.dialogVisible = true
+    },
+    submitForm(){
+      this.$refs.form.validate(validate => {
+        if (validate){
+          console.log(this.form)
+
+          this.dialogVisible = false
+          this.handleClose()
+        }
+      })
+    },
+    handleClose(done){
+      this.$refs.form.resetFields()
+      if (typeof done === 'function') done()
+    },
+    cancel(){
+      this.dialogVisible = false
+      this.handleClose()
     }
   }
 }
