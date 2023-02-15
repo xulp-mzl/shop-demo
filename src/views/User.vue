@@ -5,7 +5,7 @@
       :visible.sync="dialogVisible"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
-      width="50%"
+      width="60%"
       :before-close="handleClose">
 
       <el-form ref="form" :model="form" label-width="80px" :inline="true" :rules="rules"
@@ -46,17 +46,27 @@
 
     <div class="manage-header">
       <el-button type="primary" size="small" @click="openDialog">+ 新增</el-button>
+
+      <el-form :model="condition" inline size="small">
+        <el-form-item>
+          <el-input v-model="condition.name" placeholder="请输入名称"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button icon="el-icon-search" circle type="primary" @click="searchUser()"></el-button>
+        </el-form-item>
+      </el-form>
     </div>
 
     <div class="common-table">
       <el-table
         height="90%"
+        stripe
         :data="currentTableData"
         style="width: 100%">
         <el-table-column
           prop="name"
           label="姓名"
-          width="180">
+          width="100">
         </el-table-column>
 
         <el-table-column
@@ -80,6 +90,7 @@
           width="180">
         </el-table-column>
         <el-table-column
+          width="250"
           prop="addr"
           label="地址">
         </el-table-column>
@@ -140,10 +151,14 @@ export default {
           { required: true, message: '请输入地址' }
         ]
       },
+      sourceTable: [...tableData],
       tableData: tableData,
       modelType: 0,
       pageSize: 10,
-      currentPage: 1
+      currentPage: 1,
+      condition: {
+        name: ''
+      }
     }
   },
   methods: {
@@ -212,11 +227,23 @@ export default {
     },
     changePage(val){
       this.currentPage = val
-      this.getCurrentTableData()
     },
-    getCurrentTableData(){
-      const startIndex = (this.currentPage - 1) * this.pageSize
-      this.currentTableData = this.tableData.slice(startIndex, startIndex + this.pageSize)
+    searchUser(){
+      // 临时数据处理
+      if (!this.tableData || this.tableData.length === 0) {
+        this.tableData = [...this.sourceTable]
+      }
+
+      if (!this.condition.name.trim()){
+        this.$message({
+          type: 'warning',
+          message: '请输入查询条件'
+        })
+        return
+      }
+
+      this.currentPage = 1
+      this.tableData = this.tableData.filter((item) => item.name.indexOf(this.condition.name) >= 0)
     }
   },
   computed: {
@@ -230,9 +257,6 @@ export default {
       },
       set(v) {}
     }
-  },
-  created(){
-
   }
 }
 </script>
@@ -242,6 +266,14 @@ export default {
     height: 98%;
     .manage-header{
       margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .el-form--inline{
+        .el-form-item{
+          margin-bottom: 0;
+        }
+      }
     }
     .common-table{
       position: relative;
