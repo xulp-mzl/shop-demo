@@ -23,6 +23,9 @@
 <script>
 
 import Mock from 'mockjs'
+import Cookie from 'js-cookie'
+
+import {admin, custom} from '@/commondata/loginUser'
 
 export default {
   name: 'Login',
@@ -45,7 +48,10 @@ export default {
   methods: {
     userLogin(){
       const token = Mock.Random.guid()
-      console.log(token)
+      Cookie.set('token', token)
+      this.$router.push({name: 'home'})
+
+      console.log(custom, admin)
     }
   }
 }
