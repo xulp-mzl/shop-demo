@@ -96,8 +96,7 @@
         </el-table-column>
 
         <el-table-column
-          label="操作"
-          width="180">
+          label="操作">
           <template #default="scope">
             <el-button size="mini" @click="editUser(scope.row)">编辑</el-button>
             <el-button size="mini" @click="delUser(scope.row)" type="danger">删除</el-button>
