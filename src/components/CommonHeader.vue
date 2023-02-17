@@ -48,7 +48,9 @@ export default {
         Cookie.remove('token')
         Cookie.remove('menuData')
         // 跳转到登入页面
-        this.$router.push({name: 'login'})
+        // this.$router.push({name: 'login'})
+        // 刷新页面，重新初始化VUE实例，去掉缓存数据
+        window.location.reload()
       }
     }
   },

@@ -22,12 +22,12 @@ const menuStore = {
       menu.forEach(item => {
         if (item.children){
           item.children = item.children.map(item => {
-            item.component = () => import(`../views/${item.url}`)
+            item.component = () => import('../views/' + item.url)
             return item
           })
           routers.push(...item.children)
         } else {
-          item.component = () => import(`../views/${item.url}`)
+          item.component = () => import('../views/' + item.url)
           routers.push(item)
         }
       })
