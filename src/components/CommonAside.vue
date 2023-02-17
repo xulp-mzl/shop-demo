@@ -1,8 +1,6 @@
 <template>
   <el-menu default-active="1-4-1"
            class="el-menu-vertical-demo"
-           @open="handleOpen"
-           @close="handleClose"
            :collapse="isCollapse"
            background-color="#545c64"
            text-color="#fff"
@@ -30,22 +28,15 @@
 
 <script>
 
-import { menuData } from '@/commondata/menuData'
+// import { menuData } from '@/commondata/menuData'
+import Cookie from 'js-cookie'
 
 export default {
   name: 'CommonAside',
   data() {
-    return {
-      menuData
-    }
+    return {}
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
-    },
     clickMenu(item) {
       console.log(item)
       // 当前路由不是点击的path时，就跳转
@@ -67,6 +58,10 @@ export default {
     },
     isCollapse() {
       return this.$store.state.tab.isCollapse
+    },
+    menuData() {
+      return this.$store.state.menu.menuData.length > 0 ? this.$store.state.menu.menuData
+        : JSON.parse(Cookie.get('menuData')) || []
     }
   }
 }

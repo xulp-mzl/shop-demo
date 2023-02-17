@@ -47,11 +47,27 @@ export default {
   },
   methods: {
     userLogin(){
+      this.$refs.form.validate(validate => {
+        if (validate){
+          if (this.loginForm.password === admin.password &&
+            this.loginForm.name === admin.name){
+            this.loginAfterDeal(admin)
+          } else if (this.loginForm.password === custom.password &&
+            this.loginForm.name === custom.name){
+            this.loginAfterDeal(custom)
+          } else {
+            this.$message.error('账号或密码错误，请重新输入！')
+          }
+          console.log(custom, admin)
+        }
+      })
+    },
+    loginAfterDeal(userData){
       const token = Mock.Random.guid()
       Cookie.set('token', token)
       this.$router.push({name: 'home'})
-
-      console.log(custom, admin)
+      this.$store.commit('setMenuData', userData.menuData)
+      this.$store.commit('addRouter', this.$router)
     }
   }
 }

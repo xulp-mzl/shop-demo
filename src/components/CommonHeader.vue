@@ -9,14 +9,14 @@
     </div>
 
     <div class="right-container">
-      <el-dropdown>
+      <el-dropdown @command="handleClick">
         <span class="el-dropdown-link">
           <img :src="photo" class="custom-photo"/>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item command="userCenter">个人中心</el-dropdown-item>
+            <el-dropdown-item command="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -28,6 +28,7 @@
 
 import meinv from '@/assets/images/meinv.jpg'
 import {mapState} from 'vuex'
+import Cookie from 'js-cookie'
 
 export default {
   name: 'CommonHeader',
@@ -39,6 +40,16 @@ export default {
   methods: {
     collapseMenu(){
       this.$store.commit('setCollapse')
+    },
+    handleClick(command){
+      console.log(command)
+      if (command === 'logout'){
+        // 清除cookie
+        Cookie.remove('token')
+        Cookie.remove('menuData')
+        // 跳转到登入页面
+        this.$router.push({name: 'login'})
+      }
     }
   },
   computed: {

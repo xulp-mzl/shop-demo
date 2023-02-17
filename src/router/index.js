@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home'
-import User from '@/views/User'
+// import Home from '@/views/Home'
+// import User from '@/views/User'
 import Main from '@/views/Main'
-import Mall from '@/views/Mall'
-import PageOne from '@/views/PageOne'
-import PageTwo from '@/views/PageTwo'
+// import Mall from '@/views/Mall'
+// import PageOne from '@/views/PageOne'
+// import PageTwo from '@/views/PageTwo'
 import Login from '@/views/Login'
 
 Vue.use(VueRouter)
@@ -15,8 +15,9 @@ const routes = [
     path: '/',
     component: Main,
     redirect: '/home',
+    name: 'main',
     children: [
-      {
+      /* {
         path: 'home',
         component: Home,
         name: 'home'
@@ -40,7 +41,7 @@ const routes = [
         path: 'page2',
         component: PageTwo,
         name: 'page2'
-      }
+      } */
     ]
   },
   {
