@@ -14,7 +14,6 @@ const menuStore = {
     addRouter(state, router){
       console.log('addRouter')
       let menu = Cookie.get('menuData')
-      console.log('menu', menu)
       if (!menu) return
       menu = JSON.parse(menu)
       state.menuData = menu

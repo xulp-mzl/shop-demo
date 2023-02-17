@@ -3,7 +3,7 @@ export const admin = {
   password: '123',
   menuData: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       label: '首页',
       icon: 's-home',
@@ -38,7 +38,7 @@ export const custom = {
   password: '123',
   menuData: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       label: '首页',
       icon: 's-home',

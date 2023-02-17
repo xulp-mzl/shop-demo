@@ -65,9 +65,9 @@ export default {
     loginAfterDeal(userData){
       const token = Mock.Random.guid()
       Cookie.set('token', token)
-      this.$router.push({name: 'home'})
       this.$store.commit('setMenuData', userData.menuData)
       this.$store.commit('addRouter', this.$router)
+      this.$router.push({name: 'home'})
     }
   }
 }
