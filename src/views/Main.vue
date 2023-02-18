@@ -45,5 +45,10 @@ export default {
     .el-header {
       padding: 0;
     }
+    .el-container{
+      height: 100vh;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
   }
 </style>
