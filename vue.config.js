@@ -4,5 +4,11 @@ module.exports = {
   transpileDependencies: [
     'sockjs-client',
     'axios'
-  ]
+  ],
+  // css单独提取出来
+  css: {
+    extract: true
+  },
+  // 使打包好后本地文件能访问
+  publicPath: './'
 }
