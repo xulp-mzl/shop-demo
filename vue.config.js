@@ -10,5 +10,9 @@ module.exports = {
     extract: true
   },
   // 使打包好后本地文件能访问
-  publicPath: './'
+  // publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  publicPath: './',
+  devServer: {
+    port: process.env.VUE_APP_PORT || 8080
+  }
 }
