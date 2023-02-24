@@ -1,6 +1,6 @@
 export const menuData = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     label: '首页',
     icon: 's-home',
@@ -21,6 +21,13 @@ export const menuData = [
     url: 'User.vue'
   },
   {
+    path: '/ct',
+    name: 'commonTable',
+    label: '公共表格组件',
+    icon: 'user',
+    url: 'CommonTable.vue'
+  },
+  {
     name: 'other',
     label: '其他',
     icon: 'location',
@@ -30,7 +37,7 @@ export const menuData = [
         name: 'page1',
         label: '页面1',
         icon: 'setting',
-        url: 'PageOne1.vue'
+        url: 'PageOne.vue'
       },
       {
         path: '/page2',
