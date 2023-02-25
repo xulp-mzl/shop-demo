@@ -72,6 +72,9 @@ export default {
     &.el-menu{
       border: none;
     }
+    &.el-menu--collapse{
+      width: 64px;
+    }
     width: 200px;
     min-height: 400px;
     height: 100vh;
