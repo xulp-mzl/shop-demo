@@ -1,29 +1,31 @@
 <template>
-  <el-menu default-active="1-4-1"
-           class="el-menu-vertical-demo"
-           :collapse="isCollapse"
-           background-color="#545c64"
-           text-color="#fff"
-           active-text-color="#ffd04b">
-    <h3 class="menu-title">{{ isCollapse ? '后台' : '通用后台管理系统'}}</h3>
+  <el-scrollbar>
+    <el-menu default-active="1-4-1"
+             class="el-menu-vertical-demo"
+             :collapse="isCollapse"
+             background-color="#545c64"
+             text-color="#fff"
+             active-text-color="#ffd04b">
+      <h3 class="menu-title">{{ isCollapse ? '后台' : '通用后台管理系统'}}</h3>
 
-    <el-menu-item v-for="item in noChildren" :key="item.name" :index="item.name"
-        @click="clickMenu(item)">
-      <i :class="`el-icon-${item.icon}`"></i>
-      <span slot="title">{{item.label}}</span>
-    </el-menu-item>
-
-    <el-submenu v-for="item in hasChildren" :key="item.name" :index="item.name">
-      <template slot="title">
+      <el-menu-item v-for="item in noChildren" :key="item.name" :index="item.name"
+          @click="clickMenu(item)">
         <i :class="`el-icon-${item.icon}`"></i>
         <span slot="title">{{item.label}}</span>
-      </template>
-      <el-menu-item v-for="citem in item.children" :key="citem.name" :index="citem.name"
-            @click="clickMenu(citem)">
-        <span slot="title">{{citem.label}}</span>
       </el-menu-item>
-    </el-submenu>
-  </el-menu>
+
+      <el-submenu v-for="item in hasChildren" :key="item.name" :index="item.name">
+        <template slot="title">
+          <i :class="`el-icon-${item.icon}`"></i>
+          <span slot="title">{{item.label}}</span>
+        </template>
+        <el-menu-item v-for="citem in item.children" :key="citem.name" :index="citem.name"
+              @click="clickMenu(citem)">
+          <span slot="title">{{citem.label}}</span>
+        </el-menu-item>
+      </el-submenu>
+    </el-menu>
+  </el-scrollbar>
 </template>
 
 <script>
