@@ -11,13 +11,15 @@ const tabStore = {
         url: 'Home/Home'
       }
     ],
-    itemIndex: 0
+    itemIndex: 0,
+    currentTag: {}
   },
   mutations: {
     setCollapse(state){
       state.isCollapse = !state.isCollapse
     },
     selectMenu(state, val){
+      state.currentTag = val
       state.itemIndex = 0
       if (val.name !== 'home'){
         const index = state.tabsList.findIndex(item => item.name === val.name)

@@ -5,7 +5,7 @@
         size="small"
         :key="item.path"
         :closable="item.name !== 'home'"
-        :effect="$route.name === item.name ? 'dark' : 'plain'"
+        :effect="currentTag.name === item.name ? 'dark' : 'plain'"
         @click="changeMenu(item)"
         @close="removeTag(item, index)">
       {{ item.label }}
@@ -24,7 +24,8 @@ export default {
   },
   computed: {
     ...mapState({
-      tags: state => state.tab.tabsList
+      tags: state => state.tab.tabsList,
+      currentTag: state => state.tab.currentTag
     })
   },
   methods: {

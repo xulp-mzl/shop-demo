@@ -46,7 +46,6 @@ export default {
         !(this.$route.path === '/home' && item.path === '/')) {
         this.$router.push(item.path)
       }
-      this.$store.commit('selectMenu', item)
     }
   },
   computed: {
@@ -71,10 +70,32 @@ export default {
       let tempMatched = [...matched]
       tempMatched = tempMatched.reverse()
       let active = ''
+
+      const menuData = this.menuData
+
       tempMatched.findIndex((item) => {
         const {name} = item
         if (routerPath.indexOf(name) >= 0) {
           active = name
+          menuData.findIndex((item) => {
+            let selectItem = null
+            if (item.children){
+              item.children.findIndex(item => {
+                if (item.name === name){
+                  selectItem = item
+                }
+                return selectItem
+              })
+            } else {
+              if (item.name === name){
+                selectItem = item
+              }
+            }
+            if (selectItem) {
+              this.$store.commit('selectMenu', selectItem)
+            }
+            return selectItem
+          })
           return true
         }
         return false
