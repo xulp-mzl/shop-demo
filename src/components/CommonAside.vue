@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar>
-    <el-menu default-active="1-4-1"
+    <el-menu :default-active="activeItem"
              class="el-menu-vertical-demo"
              :collapse="isCollapse"
              background-color="#545c64"
@@ -32,6 +32,7 @@
 
 // import { menuData } from '@/commondata/menuData'
 import Cookie from 'js-cookie'
+import routerPath from '@/commondata/routerPath'
 
 export default {
   name: 'CommonAside',
@@ -40,7 +41,6 @@ export default {
   },
   methods: {
     clickMenu(item) {
-      console.log(item)
       // 当前路由不是点击的path时，就跳转
       if (this.$route.path !== item.path &&
         !(this.$route.path === '/home' && item.path === '/')) {
@@ -64,7 +64,28 @@ export default {
     menuData() {
       return this.$store.state.menu.menuData.length > 0 ? this.$store.state.menu.menuData
         : JSON.parse(Cookie.get('menuData')) || []
+    },
+    activeItem(){
+      const route = this.$route
+      const { matched } = route
+      let tempMatched = [...matched]
+      tempMatched = tempMatched.reverse()
+      let active = ''
+      tempMatched.findIndex((item) => {
+        const {name} = item
+        if (routerPath.indexOf(name) >= 0) {
+          active = name
+          return true
+        }
+        return false
+      })
+      return active
     }
+  },
+  mounted(){
+
+  },
+  created(){
   }
 }
 </script>

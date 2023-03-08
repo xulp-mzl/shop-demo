@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '@/views/Home'
+import Home from '@/views/Home'
 // import User from '@/views/User'
 import Main from '@/views/Main'
 // import Mall from '@/views/Mall'
@@ -17,11 +17,11 @@ const routes = [
     redirect: '/home',
     name: 'main',
     children: [
-      /* {
+      {
         path: 'home',
         component: Home,
         name: 'home'
-      },
+      }/* ,
       {
         path: 'user',
         component: User,

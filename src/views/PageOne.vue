@@ -1,5 +1,9 @@
 <template>
-  <h1>我是PageOne</h1>
+  <div>
+    <h1>2589</h1>
+    <router-link to="/page1/page3">跳转</router-link>
+    <router-view/>
+  </div>
 </template>
 
 <script>

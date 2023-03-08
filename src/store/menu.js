@@ -35,6 +35,16 @@ const menuStore = {
       routers.forEach(item => {
         router.addRoute('main', item)
       })
+
+      const item1 = {
+        path: 'page3',
+        name: 'page3',
+        label: '页面3',
+        icon: 'setting'
+      }
+      item1.component = () => import('../views/PageOneView.vue')
+      // 扩展
+      router.addRoute('page1', item1)
     }
   },
   actions: {
