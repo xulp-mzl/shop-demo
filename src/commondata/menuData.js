@@ -28,6 +28,13 @@ export const menuData = [
     url: 'CommonTable.vue'
   },
   {
+    path: '/tree',
+    name: 'tree',
+    label: '公共树组件',
+    icon: 'user',
+    url: 'CommonTree.vue'
+  },
+  {
     name: 'other',
     label: '其他',
     icon: 'location',
